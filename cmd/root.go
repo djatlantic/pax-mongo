@@ -59,11 +59,12 @@ func init() {
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.pax-mongo.yaml)")
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	RootCmd.Flags().BoolP("help", "h", false, "Help message for toggle")
+	RootCmd.Flags().BoolP("secure", "e", false, "Secure connection to server(s)")
 
 	RootCmd.Flags().StringVarP(&servers, "servers", "s", "localhost:27017", "List of mongodb host:port separated by commas or just host:port")
-	RootCmd.Flags().StringVarP(&dbuser, "dbuser", "u", "superadmin", "Username of super admin account")
-	RootCmd.Flags().StringVarP(&password, "password", "p", "superpass", "Password of super admin account")
+	RootCmd.Flags().StringVarP(&dbuser, "dbuser", "u", "", "Username of super admin account")
+	RootCmd.Flags().StringVarP(&password, "password", "p", "", "Password of super admin account")
 	RootCmd.Flags().StringVarP(&db, "db", "d", "admin", "Database name")
 	RootCmd.Flags().StringVarP(&rs, "rs", "r", "", "Required replicated set name for mongodb cluster")
 

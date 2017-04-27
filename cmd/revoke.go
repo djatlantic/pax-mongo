@@ -20,6 +20,7 @@ import (
 	"github.com/djatlantic/pax-mongo/connect"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"log"
 	"strings"
@@ -44,7 +45,14 @@ to quickly create a Cobra application.`,
 			role_db[i] = bson.M{"role": v, "db": db}
 		}
 
-		session := connect.Connect()
+		var session *mgo.Session
+
+		secure := viper.GetBool("tls")
+		if secure {
+			session = connect.ConnectSecure()
+		} else {
+			session = connect.Connect()
+		}
 		defer session.Close()
 
 		result := bson.M{}
